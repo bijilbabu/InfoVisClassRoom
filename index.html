@@ -1,11 +1,25 @@
 <html>
-  <head></head>
+  <head>
+     <style>
+       .header h1 {
+         background-color: blue;
+         text-align: center;
+       }
+     </style>
+     <script>
+        function onButtonCall()
+        {
+          var span = document.getElementById("gdp");
+          span.innerHTML = "$"+document.getElementById("gotext").value;
+        }
+     </script>
+  </head>
   <body>
     <div class="header">
-      <h1 align="center"> Country GDP vs Easy of Business</h1>
+      <h1> Country GDP vs Easy of Business</h1>
     </div>
     <div>
-      Search:<input type = "text" name="Search:"/> <input type="button" name="Go"/> GDP: <span id="gdp">$11.000</span>
+      Search:<input id="gotext" type = "text" name="Search:"/> <input id="goBtn" type="button" value="Go" onClick="onButtonCall()"/> GDP: <span id="gdp">$11.000</span>
     </div>
   </body>
 </html>
