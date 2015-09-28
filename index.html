@@ -1,25 +1,51 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
 <html>
   <head>
+     <title>D3 Assignment</title>
      <style>
-       .header h1 {
-         background-color: blue;
+       .header {
+         background-color: navy;
          text-align: center;
+         color: white;
        }
      </style>
-     <script>
-        function onButtonCall()
-        {
-          var span = document.getElementById("gdp");
-          span.innerHTML = "$"+document.getElementById("gotext").value;
-        }
-     </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
   </head>
   <body>
-    <div class="header">
-      <h1> Country GDP vs Easy of Business</h1>
-    </div>
-    <div>
-      Search:<input id="gotext" type = "text" name="Search:"/> <input id="goBtn" type="button" value="Go" onClick="onButtonCall()"/> GDP: <span id="gdp">$11.000</span>
-    </div>
+        <script type="text/javascript">
+                d3.select("body").append("h1").attr("class","header").text("Country GDP vs Easy of Business");
+                var div = d3.select("body").append("div");
+                var countries = [
+                        { name: "Brazil", GDP: 1000 },
+                        { name: "Iraq", GDP: 890 },
+                        { name: "US", GDP: 300 },
+                        { name: "India", GDP: 500 }
+                ];
+
+                div.append("span").text("Search: ");
+                div.append("span").html("<input type='text' id='searchtext'/> <input class='header' id='goBtn' type='button' value='Go'/>");
+                div.append("span").text(" GDP: ").append("span").attr("id","result").attr("style","font-weight: bold");
+
+                div.select('#goBtn').on('click', function()
+                        {
+                                var textboxValue = div.select('#searchtext')[0][0].value;
+                                var result = countries.find(function(element, index, array)
+                                {
+                                        return element.name == textboxValue;
+                                });
+
+                                if(result)
+                                {
+                                   div.select('#result').text(result.name + ": " + result.GDP);
+                                }
+                                else
+                                {
+                                  div.select('#result').text("The entered value was not found in the available dataset, please try from the following : Brazil, Iraq, US, India");
+                                }
+                        }
+                );
+
+        </script>
   </body>
 </html>
